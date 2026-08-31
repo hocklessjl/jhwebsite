@@ -1407,25 +1407,28 @@
         <div class="contact-form-head">
           <h4>Send me a message</h4>
         </div>
-        <form id="contactForm" action="https://formspree.io/f/xnpqpalq" method="POST">
+        <!-- Submits straight to this Google Form's own endpoint, into a hidden iframe
+             (below) so the page itself never navigates away. entry.* field names come
+             from the form's own "get pre-filled link" feature. -->
+        <form id="contactForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdbYkNZticolbZv-ZpK1Zi7nNV9GIYpMxSmu3rWVxHL6kOz_Q/formResponse" method="POST" target="gform-hidden-frame">
           <div class="form-field">
             <label for="cfName">Name</label>
-            <input id="cfName" name="name" type="text" autocomplete="name" required>
+            <input id="cfName" name="entry.2005620554" type="text" autocomplete="name" required>
           </div>
           <div class="form-field">
             <label for="cfEmail">Email</label>
-            <input id="cfEmail" name="email" type="email" autocomplete="email" required>
+            <input id="cfEmail" name="entry.1045781291" type="email" autocomplete="email" required>
           </div>
           <div class="form-field">
             <label for="cfMessage">Message</label>
-            <textarea id="cfMessage" name="message" rows="4" required></textarea>
+            <textarea id="cfMessage" name="entry.1065046570" rows="4" required></textarea>
           </div>
           <div class="form-submit-row">
             <button class="btn primary" type="submit" id="formSubmitBtn">Send message</button>
             <span class="form-status" id="formStatus" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span> Sent &mdash; thanks, I'll get back to you soon.</span>
-            <span class="form-status form-status--error" id="formError" role="status" aria-live="polite">Something went wrong &mdash; sending it as a direct submission instead.</span>
           </div>
         </form>
+        <iframe name="gform-hidden-frame" id="gformHiddenFrame" style="display:none" title="" aria-hidden="true"></iframe>
       </div>
 
       <p class="foot-note">JENNIFER HOCKLESS &middot; PORTFOLIO &middot; UPDATED 2026</p>
@@ -1689,45 +1692,37 @@
       });
     }
 
-    /* ---- Contact form: fetch() to Formspree (CORS-friendly), so the inline "Sent"
-       confirmation only appears once the server actually confirms receipt — not just
-       when *something* loaded. If the request fails for any reason (network hiccup,
-       fetch blocked, etc.) it falls back to a normal form submission, which Formspree
-       accepts too and shows its own confirmation page, so the message still gets
-       through either way. */
+    /* ---- Contact form: submits natively into a same-page hidden iframe, so the
+       page itself never navigates and there's no separate tab or page for a visitor
+       to deal with. Google's response is cross-origin and can't be read, so "Sent"
+       is shown once the hidden iframe finishes loading a response — a reliable
+       signal the submission actually reached Google's servers, just not a byte-level
+       read of what they did with it. The first load event (the iframe's own initial
+       blank page) is ignored via the `submitting` flag. */
     var contactForm = document.getElementById('contactForm');
     var formBtn = document.getElementById('formSubmitBtn');
     var formStatus = document.getElementById('formStatus');
-    var formError = document.getElementById('formError');
-    if (contactForm && formBtn && formStatus && formError) {
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+    var hiddenFrame = document.getElementById('gformHiddenFrame');
+    if (contactForm && formBtn && formStatus && hiddenFrame) {
+      var submitting = false;
+      contactForm.addEventListener('submit', function () {
+        submitting = true;
         formBtn.disabled = true;
         formBtn.textContent = 'Sending…';
         formStatus.classList.remove('visible');
-        formError.classList.remove('visible');
-
-        fetch(contactForm.getAttribute('action'), {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' }
-        }).then(function (res) {
-          if (!res.ok) throw new Error('Formspree returned an error status');
-          formBtn.textContent = 'Sent';
-          formStatus.classList.add('visible');
-          contactForm.reset();
-          setTimeout(function () {
-            formBtn.disabled = false;
-            formBtn.textContent = 'Send message';
-          }, 3000);
-        }).catch(function () {
-          // fetch blocked or failed — fall back to a real submission. form.submit()
-          // bypasses this same 'submit' listener (per spec), so no re-entry loop.
-          formError.classList.add('visible');
+        // No preventDefault(): the browser submits the form natively and immediately,
+        // straight into the hidden iframe via target="gform-hidden-frame" above.
+      });
+      hiddenFrame.addEventListener('load', function () {
+        if (!submitting) return;
+        submitting = false;
+        formBtn.textContent = 'Sent';
+        formStatus.classList.add('visible');
+        contactForm.reset();
+        setTimeout(function () {
           formBtn.disabled = false;
           formBtn.textContent = 'Send message';
-          contactForm.submit();
-        });
+        }, 3000);
       });
     }
   })();
