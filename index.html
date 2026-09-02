@@ -5,24 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jennifer Hockless — IT Operations &amp; Digital Transformation</title>
 <meta name="description" content="Interactive portfolio of Jennifer Hockless — IT Operations &amp; Digital Transformation leadership, projects, and impact.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&display=swap">
 <style>
   :root {
-    --paper: #EEF1F4;
+    --paper: #F2F6F7;
     --paper-raised: #FFFFFF;
-    --ink: #14181D;
-    --ink-soft: #4B5560;
-    --ink-faint: #6C7680;
-    --line: rgba(20,24,29,0.14);
-    --line-strong: rgba(20,24,29,0.28);
-    --signal: #3B3F8C;
-    --signal-bg: rgba(59,63,140,0.10);
-    --circuit: #9C7A17;
-    --circuit-bg: rgba(156,122,23,0.09);
+    --ink: #0E2430;
+    --ink-soft: #3E5763;
+    --ink-faint: #6B838C;
+    --line: rgba(14,36,48,0.14);
+    --line-strong: rgba(14,36,48,0.28);
+    --signal: #0E7C74;
+    --signal-bg: rgba(14,124,116,0.10);
+    --circuit: #2D5FA3;
+    --circuit-bg: rgba(45,95,163,0.09);
     --status-good: #2F7D4F;
-    --shadow: 0 1px 2px rgba(20,24,29,0.04), 0 8px 24px rgba(20,24,29,0.06);
+    --shadow: 0 1px 2px rgba(14,36,48,0.05), 0 8px 24px rgba(14,36,48,0.07);
+
+    /* Fixed, theme-independent "band" palette — a deep navy panel used sparingly
+       to give one or two sections real visual rhythm, regardless of light/dark mode. */
+    --band: #123244;
+    --band-surface: #17394D;
+    --band-ink: #DCEEEE;
+    --band-ink-soft: rgba(220,238,238,0.72);
+    --band-ink-faint: rgba(220,238,238,0.5);
+    --band-line: rgba(220,238,238,0.14);
+    --band-line-strong: rgba(220,238,238,0.26);
+    --band-signal: #3FD6C7;
+    --band-signal-bg: rgba(63,214,199,0.14);
+    --band-circuit: #6FA8E8;
+    --band-circuit-bg: rgba(111,168,232,0.12);
 
     --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", "Menlo", "Consolas", monospace;
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-display: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
     --measure: 62ch;
     --rail-w: 250px;
@@ -30,36 +47,36 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #0E1216;
-      --paper-raised: #171C21;
-      --ink: #E8ECEF;
-      --ink-soft: #9AA6AF;
-      --ink-faint: #78838C;
-      --line: rgba(232,236,239,0.14);
-      --line-strong: rgba(232,236,239,0.26);
-      --signal: #8C90E0;
-      --signal-bg: rgba(140,144,224,0.12);
-      --circuit: #E8B84B;
-      --circuit-bg: rgba(232,184,75,0.11);
+      --paper: #0B1417;
+      --paper-raised: #12222A;
+      --ink: #E4F1EF;
+      --ink-soft: #9FC1BE;
+      --ink-faint: #74928F;
+      --line: rgba(228,241,239,0.14);
+      --line-strong: rgba(228,241,239,0.26);
+      --signal: #3FD6C7;
+      --signal-bg: rgba(63,214,199,0.14);
+      --circuit: #6FA8E8;
+      --circuit-bg: rgba(111,168,232,0.12);
       --status-good: #57C77E;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+      --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
     }
   }
 
   :root[data-theme="dark"] {
-    --paper: #0E1216;
-    --paper-raised: #171C21;
-    --ink: #E8ECEF;
-    --ink-soft: #9AA6AF;
-    --ink-faint: #78838C;
-    --line: rgba(232,236,239,0.14);
-    --line-strong: rgba(232,236,239,0.26);
-    --signal: #8C90E0;
-    --signal-bg: rgba(140,144,224,0.12);
-    --circuit: #E8B84B;
-    --circuit-bg: rgba(232,184,75,0.11);
+    --paper: #0B1417;
+    --paper-raised: #12222A;
+    --ink: #E4F1EF;
+    --ink-soft: #9FC1BE;
+    --ink-faint: #74928F;
+    --line: rgba(228,241,239,0.14);
+    --line-strong: rgba(228,241,239,0.26);
+    --signal: #3FD6C7;
+    --signal-bg: rgba(63,214,199,0.14);
+    --circuit: #6FA8E8;
+    --circuit-bg: rgba(111,168,232,0.12);
     --status-good: #57C77E;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
   }
 
   * { box-sizing: border-box; }
@@ -89,15 +106,25 @@
     border-radius: 2px;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  h3, h4 {
     font-family: var(--font-mono);
     font-weight: 700;
     letter-spacing: -0.01em;
     text-wrap: balance;
     margin: 0;
+    color: var(--ink);
   }
 
-  p { margin: 0; }
+  p { margin: 0; color: var(--ink); }
 
   .eyebrow {
     font-family: var(--font-mono);
@@ -289,6 +316,23 @@
     padding: 5rem 2.25rem 5.5rem;
   }
   @media (max-width: 640px) { .section { padding: 3rem 1.25rem 4.5rem; } }
+
+  /* One section, always-dark regardless of light/dark mode — re-declares the shared
+     tokens locally so every existing component (stats, chips, eyebrows, links) picks
+     up the on-band colors automatically, with no per-component overrides needed. */
+  .section--band {
+    background: var(--band);
+    --paper-raised: var(--band-surface);
+    --ink: var(--band-ink);
+    --ink-soft: var(--band-ink-soft);
+    --ink-faint: var(--band-ink-faint);
+    --line: var(--band-line);
+    --line-strong: var(--band-line-strong);
+    --signal: var(--band-signal);
+    --signal-bg: var(--band-signal-bg);
+    --circuit: var(--band-circuit);
+    --circuit-bg: var(--band-circuit-bg);
+  }
 
   .section-head { margin-bottom: 2.25rem; }
   .section-head h2 {
@@ -965,7 +1009,7 @@
       </div>
     </section>
 
-    <section class="section" id="impact" data-reveal>
+    <section class="section section--band" id="impact" data-reveal>
       <div class="section-head">
         <p class="eyebrow"><span class="code">01</span> IMPACT</p>
         <h2>The Numbers Behind the Systems</h2>
