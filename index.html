@@ -5,61 +5,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Jennifer Hockless — IT Operations &amp; Digital Transformation</title>
 <meta name="description" content="Interactive portfolio of Jennifer Hockless — IT Operations &amp; Digital Transformation leadership, projects, and impact.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&display=swap">
 <style>
   :root {
-    --paper: #EEF1F4;
+    /* Brand palette as supplied: navy #25274D, slate #464866, mist #AAABB8,
+       sky #2E9CCA, teal #29648A. --paper and --ink-faint are the only two
+       values here NOT literally one of those five — the palette has no
+       near-white for a light background, and mist (#AAABB8) is too low-
+       contrast to use as running text on it (2.1:1), so both are derived
+       tints in the same family rather than invented from scratch. */
+    --paper: #F3F4F8;
     --paper-raised: #FFFFFF;
-    --ink: #14181D;
-    --ink-soft: #4B5560;
-    --ink-faint: #6C7680;
-    --line: rgba(20,24,29,0.14);
-    --line-strong: rgba(20,24,29,0.28);
-    --signal: #3B3F8C;
-    --signal-bg: rgba(59,63,140,0.10);
-    --circuit: #9C7A17;
-    --circuit-bg: rgba(156,122,23,0.09);
+    --ink: #25274D;
+    --ink-soft: #464866;
+    --ink-faint: #71738A;
+    --line: rgba(37,39,77,0.14);
+    --line-strong: rgba(37,39,77,0.28);
+    --signal: #2E9CCA;
+    --signal-bg: rgba(46,156,202,0.10);
+    --circuit: #29648A;
+    --circuit-bg: rgba(41,100,138,0.09);
     --status-good: #2F7D4F;
-    --shadow: 0 1px 2px rgba(20,24,29,0.04), 0 8px 24px rgba(20,24,29,0.06);
+    --shadow: 0 1px 2px rgba(37,39,77,0.05), 0 8px 24px rgba(37,39,77,0.07);
+
+    /* Fixed, theme-independent "band" palette — a deep navy panel used sparingly
+       to give one or two sections real visual rhythm, regardless of light/dark mode.
+       Built straight from the same navy/slate/mist/sky, so it reads as the same
+       system as dark mode below rather than a fourth, unrelated color world. */
+    --band: #25274D;
+    --band-surface: #464866;
+    --band-ink: #FBFBFB;
+    --band-ink-soft: rgba(251,251,251,0.72);
+    --band-ink-faint: rgba(251,251,251,0.48);
+    --band-line: rgba(170,171,184,0.16);
+    --band-line-strong: rgba(170,171,184,0.28);
+    --band-signal: #2E9CCA;
+    --band-signal-bg: rgba(46,156,202,0.16);
+    --band-circuit: #749AB3;
+    --band-circuit-bg: rgba(116,154,179,0.14);
 
     --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", "Menlo", "Consolas", monospace;
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-display: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
     --measure: 62ch;
     --rail-w: 250px;
   }
 
+  /* --ink here is off-white (#FBFBFB), not mist. Mist itself only reaches 6.25:1 on
+     the navy paper, and its soft/faint tints (used for body copy and small labels)
+     dropped as low as 2.66:1 — under WCAG AA's 3:1 floor even for large text. Same
+     fix applied to --band-ink below, since the band panel has the same navy ground. */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #0E1216;
-      --paper-raised: #171C21;
-      --ink: #E8ECEF;
-      --ink-soft: #9AA6AF;
-      --ink-faint: #78838C;
-      --line: rgba(232,236,239,0.14);
-      --line-strong: rgba(232,236,239,0.26);
-      --signal: #8C90E0;
-      --signal-bg: rgba(140,144,224,0.12);
-      --circuit: #E8B84B;
-      --circuit-bg: rgba(232,184,75,0.11);
+      --paper: #25274D;
+      --paper-raised: #464866;
+      --ink: #FBFBFB;
+      --ink-soft: rgba(251,251,251,0.72);
+      --ink-faint: rgba(251,251,251,0.48);
+      --line: rgba(170,171,184,0.16);
+      --line-strong: rgba(170,171,184,0.28);
+      --signal: #2E9CCA;
+      --signal-bg: rgba(46,156,202,0.16);
+      --circuit: #749AB3;
+      --circuit-bg: rgba(116,154,179,0.14);
       --status-good: #57C77E;
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+      --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
     }
   }
 
   :root[data-theme="dark"] {
-    --paper: #0E1216;
-    --paper-raised: #171C21;
-    --ink: #E8ECEF;
-    --ink-soft: #9AA6AF;
-    --ink-faint: #78838C;
-    --line: rgba(232,236,239,0.14);
-    --line-strong: rgba(232,236,239,0.26);
-    --signal: #8C90E0;
-    --signal-bg: rgba(140,144,224,0.12);
-    --circuit: #E8B84B;
-    --circuit-bg: rgba(232,184,75,0.11);
+    --paper: #25274D;
+    --paper-raised: #464866;
+    --ink: #FBFBFB;
+    --ink-soft: rgba(251,251,251,0.72);
+    --ink-faint: rgba(251,251,251,0.48);
+    --line: rgba(170,171,184,0.16);
+    --line-strong: rgba(170,171,184,0.28);
+    --signal: #2E9CCA;
+    --signal-bg: rgba(46,156,202,0.16);
+    --circuit: #749AB3;
+    --circuit-bg: rgba(116,154,179,0.14);
     --status-good: #57C77E;
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
   }
 
   * { box-sizing: border-box; }
@@ -89,15 +118,25 @@
     border-radius: 2px;
   }
 
-  h1, h2, h3, h4 {
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  h3, h4 {
     font-family: var(--font-mono);
     font-weight: 700;
     letter-spacing: -0.01em;
     text-wrap: balance;
     margin: 0;
+    color: var(--ink);
   }
 
-  p { margin: 0; }
+  p { margin: 0; color: var(--ink); }
 
   .eyebrow {
     font-family: var(--font-mono);
@@ -289,6 +328,23 @@
     padding: 5rem 2.25rem 5.5rem;
   }
   @media (max-width: 640px) { .section { padding: 3rem 1.25rem 4.5rem; } }
+
+  /* One section, always-dark regardless of light/dark mode — re-declares the shared
+     tokens locally so every existing component (stats, chips, eyebrows, links) picks
+     up the on-band colors automatically, with no per-component overrides needed. */
+  .section--band {
+    background: var(--band);
+    --paper-raised: var(--band-surface);
+    --ink: var(--band-ink);
+    --ink-soft: var(--band-ink-soft);
+    --ink-faint: var(--band-ink-faint);
+    --line: var(--band-line);
+    --line-strong: var(--band-line-strong);
+    --signal: var(--band-signal);
+    --signal-bg: var(--band-signal-bg);
+    --circuit: var(--band-circuit);
+    --circuit-bg: var(--band-circuit-bg);
+  }
 
   .section-head { margin-bottom: 2.25rem; }
   .section-head h2 {
@@ -965,7 +1021,7 @@
       </div>
     </section>
 
-    <section class="section" id="impact" data-reveal>
+    <section class="section section--band" id="impact" data-reveal>
       <div class="section-head">
         <p class="eyebrow"><span class="code">01</span> IMPACT</p>
         <h2>The Numbers Behind the Systems</h2>
