@@ -35,9 +35,9 @@
        system as dark mode below rather than a fourth, unrelated color world. */
     --band: #25274D;
     --band-surface: #464866;
-    --band-ink: #AAABB8;
-    --band-ink-soft: rgba(170,171,184,0.72);
-    --band-ink-faint: rgba(170,171,184,0.5);
+    --band-ink: #FBFBFB;
+    --band-ink-soft: rgba(251,251,251,0.72);
+    --band-ink-faint: rgba(251,251,251,0.48);
     --band-line: rgba(170,171,184,0.16);
     --band-line-strong: rgba(170,171,184,0.28);
     --band-signal: #2E9CCA;
@@ -53,13 +53,17 @@
     --rail-w: 250px;
   }
 
+  /* --ink here is off-white (#FBFBFB), not mist. Mist itself only reaches 6.25:1 on
+     the navy paper, and its soft/faint tints (used for body copy and small labels)
+     dropped as low as 2.66:1 — under WCAG AA's 3:1 floor even for large text. Same
+     fix applied to --band-ink below, since the band panel has the same navy ground. */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --paper: #25274D;
       --paper-raised: #464866;
-      --ink: #AAABB8;
-      --ink-soft: rgba(170,171,184,0.72);
-      --ink-faint: rgba(170,171,184,0.5);
+      --ink: #FBFBFB;
+      --ink-soft: rgba(251,251,251,0.72);
+      --ink-faint: rgba(251,251,251,0.48);
       --line: rgba(170,171,184,0.16);
       --line-strong: rgba(170,171,184,0.28);
       --signal: #2E9CCA;
@@ -74,9 +78,9 @@
   :root[data-theme="dark"] {
     --paper: #25274D;
     --paper-raised: #464866;
-    --ink: #AAABB8;
-    --ink-soft: rgba(170,171,184,0.72);
-    --ink-faint: rgba(170,171,184,0.5);
+    --ink: #FBFBFB;
+    --ink-soft: rgba(251,251,251,0.72);
+    --ink-faint: rgba(251,251,251,0.48);
     --line: rgba(170,171,184,0.16);
     --line-strong: rgba(170,171,184,0.28);
     --signal: #2E9CCA;
