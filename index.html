@@ -9,33 +9,41 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&display=swap">
 <style>
   :root {
-    --paper: #F2F6F7;
+    /* Brand palette as supplied: navy #25274D, slate #464866, mist #AAABB8,
+       sky #2E9CCA, teal #29648A. --paper and --ink-faint are the only two
+       values here NOT literally one of those five — the palette has no
+       near-white for a light background, and mist (#AAABB8) is too low-
+       contrast to use as running text on it (2.1:1), so both are derived
+       tints in the same family rather than invented from scratch. */
+    --paper: #F3F4F8;
     --paper-raised: #FFFFFF;
-    --ink: #0E2430;
-    --ink-soft: #3E5763;
-    --ink-faint: #6B838C;
-    --line: rgba(14,36,48,0.14);
-    --line-strong: rgba(14,36,48,0.28);
-    --signal: #0E7C74;
-    --signal-bg: rgba(14,124,116,0.10);
-    --circuit: #2D5FA3;
-    --circuit-bg: rgba(45,95,163,0.09);
+    --ink: #25274D;
+    --ink-soft: #464866;
+    --ink-faint: #71738A;
+    --line: rgba(37,39,77,0.14);
+    --line-strong: rgba(37,39,77,0.28);
+    --signal: #2E9CCA;
+    --signal-bg: rgba(46,156,202,0.10);
+    --circuit: #29648A;
+    --circuit-bg: rgba(41,100,138,0.09);
     --status-good: #2F7D4F;
-    --shadow: 0 1px 2px rgba(14,36,48,0.05), 0 8px 24px rgba(14,36,48,0.07);
+    --shadow: 0 1px 2px rgba(37,39,77,0.05), 0 8px 24px rgba(37,39,77,0.07);
 
     /* Fixed, theme-independent "band" palette — a deep navy panel used sparingly
-       to give one or two sections real visual rhythm, regardless of light/dark mode. */
-    --band: #123244;
-    --band-surface: #17394D;
-    --band-ink: #DCEEEE;
-    --band-ink-soft: rgba(220,238,238,0.72);
-    --band-ink-faint: rgba(220,238,238,0.5);
-    --band-line: rgba(220,238,238,0.14);
-    --band-line-strong: rgba(220,238,238,0.26);
-    --band-signal: #3FD6C7;
-    --band-signal-bg: rgba(63,214,199,0.14);
-    --band-circuit: #6FA8E8;
-    --band-circuit-bg: rgba(111,168,232,0.12);
+       to give one or two sections real visual rhythm, regardless of light/dark mode.
+       Built straight from the same navy/slate/mist/sky, so it reads as the same
+       system as dark mode below rather than a fourth, unrelated color world. */
+    --band: #25274D;
+    --band-surface: #464866;
+    --band-ink: #AAABB8;
+    --band-ink-soft: rgba(170,171,184,0.72);
+    --band-ink-faint: rgba(170,171,184,0.5);
+    --band-line: rgba(170,171,184,0.16);
+    --band-line-strong: rgba(170,171,184,0.28);
+    --band-signal: #2E9CCA;
+    --band-signal-bg: rgba(46,156,202,0.16);
+    --band-circuit: #749AB3;
+    --band-circuit-bg: rgba(116,154,179,0.14);
 
     --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", "Menlo", "Consolas", monospace;
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -47,34 +55,34 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #0B1417;
-      --paper-raised: #12222A;
-      --ink: #E4F1EF;
-      --ink-soft: #9FC1BE;
-      --ink-faint: #74928F;
-      --line: rgba(228,241,239,0.14);
-      --line-strong: rgba(228,241,239,0.26);
-      --signal: #3FD6C7;
-      --signal-bg: rgba(63,214,199,0.14);
-      --circuit: #6FA8E8;
-      --circuit-bg: rgba(111,168,232,0.12);
+      --paper: #25274D;
+      --paper-raised: #464866;
+      --ink: #AAABB8;
+      --ink-soft: rgba(170,171,184,0.72);
+      --ink-faint: rgba(170,171,184,0.5);
+      --line: rgba(170,171,184,0.16);
+      --line-strong: rgba(170,171,184,0.28);
+      --signal: #2E9CCA;
+      --signal-bg: rgba(46,156,202,0.16);
+      --circuit: #749AB3;
+      --circuit-bg: rgba(116,154,179,0.14);
       --status-good: #57C77E;
       --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
     }
   }
 
   :root[data-theme="dark"] {
-    --paper: #0B1417;
-    --paper-raised: #12222A;
-    --ink: #E4F1EF;
-    --ink-soft: #9FC1BE;
-    --ink-faint: #74928F;
-    --line: rgba(228,241,239,0.14);
-    --line-strong: rgba(228,241,239,0.26);
-    --signal: #3FD6C7;
-    --signal-bg: rgba(63,214,199,0.14);
-    --circuit: #6FA8E8;
-    --circuit-bg: rgba(111,168,232,0.12);
+    --paper: #25274D;
+    --paper-raised: #464866;
+    --ink: #AAABB8;
+    --ink-soft: rgba(170,171,184,0.72);
+    --ink-faint: rgba(170,171,184,0.5);
+    --line: rgba(170,171,184,0.16);
+    --line-strong: rgba(170,171,184,0.28);
+    --signal: #2E9CCA;
+    --signal-bg: rgba(46,156,202,0.16);
+    --circuit: #749AB3;
+    --circuit-bg: rgba(116,154,179,0.14);
     --status-good: #57C77E;
     --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 12px 32px rgba(0,0,0,0.4);
   }
